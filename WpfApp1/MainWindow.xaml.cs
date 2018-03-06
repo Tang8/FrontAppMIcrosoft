@@ -139,8 +139,27 @@ namespace FaceTutorial
             Mess.Text = Mess.Text + "height: " + reader.Height + "\n";
             Mess.Text = Mess.Text + "fps:    " + reader.FrameRate + "\n";
             Mess.Text = Mess.Text + "codec:  " + reader.CodecName + "\n";
+            // read 100 video frames out of it
+            for (int i = 0; i < 100; i++)
+            {
+                System.Drawing.Bitmap bitmapSource = new System.Drawing.Bitmap(reader.ReadVideoFrame());
+
+                FacePhoto.Source = this.Convert(bitmapSource);
+            }
             reader.Close();
             Mess.Text = Mess.Text + filePath + "\n";
+        }
+
+        private BitmapImage Convert(System.Drawing.Bitmap src)
+        {
+            MemoryStream ms = new MemoryStream();
+            ((System.Drawing.Bitmap)src).Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            ms.Seek(0, SeekOrigin.Begin);
+            image.StreamSource = ms;
+            image.EndInit();
+            return image;
         }
 
         // Displays the face description when the mouse is over a face rectangle.
