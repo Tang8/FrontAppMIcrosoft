@@ -11,6 +11,7 @@ using System.Windows.Media.Animation;
 using Microsoft.ProjectOxford.Common.Contract;
 using Microsoft.ProjectOxford.Face;
 using Microsoft.ProjectOxford.Face.Contract;
+using Accord.Video.FFMPEG;
 
 namespace FaceTutorial
 {
@@ -66,11 +67,7 @@ namespace FaceTutorial
             bitmapSource.EndInit();
 
             FacePhoto.Source = bitmapSource;
-
-            // Detect any faces in the image.
-            Title = "Detecting...";
             faces = await UploadAndDetectFaces(filePath);
-            Title = String.Format("Detection Finished. {0} face(s) detected", faces.Length);
 
             if (faces.Length > 0)
             {
@@ -115,13 +112,10 @@ namespace FaceTutorial
 
                 faceWithRectBitmap.Render(visual);
                 FacePhoto.Source = faceWithRectBitmap;
-
-                // Set the status bar text.
-                faceDescriptionStatusBar.Text = "Place the mouse pointer over a face to see the face description.";
             }
         }
 
-        private async void BrowseButton_Click_two(object sender, RoutedEventArgs e)
+        private void BrowseButton_Click_two(object sender, RoutedEventArgs e)
         {
             // Get the image file to scan from the user.
             var openDlg = new Microsoft.Win32.OpenFileDialog();
@@ -138,7 +132,15 @@ namespace FaceTutorial
                 return;
             }
             string filePath = openDlg.FileName;
-            Mess.Text = filePath;
+
+            VideoFileReader reader = new VideoFileReader();
+            reader.Open(filePath);
+            Mess.Text = "width:  " + reader.Width + "\n";
+            Mess.Text = Mess.Text + "height: " + reader.Height + "\n";
+            Mess.Text = Mess.Text + "fps:    " + reader.FrameRate + "\n";
+            Mess.Text = Mess.Text + "codec:  " + reader.CodecName + "\n";
+            reader.Close();
+            Mess.Text = Mess.Text + filePath + "\n";
         }
 
         // Displays the face description when the mouse is over a face rectangle.
@@ -159,7 +161,7 @@ namespace FaceTutorial
             var scale = FacePhoto.ActualWidth / (bitmapSource.PixelWidth / resizeFactor);
 
             // Check if this mouse position is over a face rectangle.
-            bool mouseOverFace = true;
+            bool mouseOverFace = false;
 
             for (int i = 0; i < faces.Length; ++i)
             {
@@ -174,6 +176,9 @@ namespace FaceTutorial
                 {
                     faceDescriptionStatusBar.Text = faceDescriptions[i];
                     mouseOverFace = true;
+                    break;
+                } else if (faces.Length == 1) {
+                    faceDescriptionStatusBar.Text = faceDescriptions[0];
                     break;
                 }
             }
