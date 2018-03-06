@@ -1,0 +1,16 @@
+﻿<Page
+    x:Class="CodeCamp_Microsoft.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CodeCamp_Microsoft"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Height="668.5" Width="1152">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="-187,-8,-135.69,-128.538">
+
+        <Button x:Name="Button_import" Content="Import Files" HorizontalAlignment="Left" Height="70" Margin="1105,317,-1315,0" VerticalAlignment="Top" Width="210" Click="Button_Click" Foreground="White" FontFamily="Agency FB" FontSize="24" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="Titre" HorizontalAlignment="Left" Height="106" Margin="486,41,-1042,0" Text="Bienvenue dans notre atelier de scrapping !" TextWrapping="Wrap" VerticalAlignment="Top" Width="556" SelectionChanged="Button_Click" FontFamily="Agency FB" FontSize="36" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="MessageError" HorizontalAlignment="Left" Height="193" Margin="391,479,0,0" Text="" VerticalAlignment="Top" Width="715" />
+    </Grid>
+</Page>
