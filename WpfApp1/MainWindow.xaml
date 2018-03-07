@@ -1,22 +1,39 @@
 ﻿<Window x:Class="FaceTutorial.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="700" Width="960">
+        Title="MainWindow" Height="570" Width="960">
     <Grid x:Name="BackPanel">
-        <Image x:Name="FacePhoto" Stretch="Uniform" Margin="0,0,0,50" MouseMove="FacePhoto_MouseMove" />
-        <DockPanel DockPanel.Dock="Bottom">
-            <Button x:Name="BrowseButton" Width="72" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left"
-                    Content="Import Picture"
-                    Click="BrowseButton_Click" />
-            <Button x:Name="BrowseButton2" Width="72" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left"
-                    Content="Import video"
-                    Click="BrowseButton_Click_two" />
-            <StatusBar VerticalAlignment="Bottom">
-                <StatusBarItem Width="559">
-                    <TextBlock Name="faceDescriptionStatusBar" />
-                </StatusBarItem>
-            </StatusBar>
-            <TextBlock x:Name="Mess" Height="26" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,625,0,0" Width="249" RenderTransformOrigin="0.961,0.437">
+        <Grid.Background>
+            <ImageBrush ImageSource="Image/background.png" AlignmentY="center" AlignmentX="Center"/>
+        </Grid.Background>
+        <Image x:Name="FacePhoto" Stretch="Uniform" Margin="0,0,0,50" MouseMove="FacePhoto_MouseMove" HorizontalAlignment="Left"/>
+        <Grid DockPanel.Dock="Bottom">
+            <Button x:Name="BrowseButton" Width="93" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                Content="Import Picture" BorderThickness="0,1,1,0"
+                Click="BrowseButton_Click" Margin="3,0,0,0" RenderTransformOrigin="0.5,0.5" Background="#FFB4D0BB" >
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="-12"/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <Button x:Name="BrowseButton2" Width="93" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                Content="Import video"
+                Click="BrowseButton_Click_two" Margin="96,0,0,0" BorderThickness="0,1,1,0" RenderTransformOrigin="0.5,0.5" Background="#FF8BBD98" >
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="-12"/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+
+            <TextBlock x:Name="Mess" Height="26" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.961,0.437" Margin="700,409,3.6,0">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -26,6 +43,21 @@
                     </TransformGroup>
                 </TextBlock.RenderTransform>
             </TextBlock>
-        </DockPanel>
+            <StatusBarItem Background="#FF151414" Foreground="White"  Margin="230,0,-43.4,0" VerticalAlignment="Bottom" RenderTransformOrigin="0,0" FontSize="10">
+                <StatusBarItem.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="-12"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="3E-06"/>
+                    </TransformGroup>
+
+                </StatusBarItem.RenderTransform>
+
+                <TextBlock x:Name="faceDescriptionStatusBar" RenderTransformOrigin="0.5,0.5" Background="#FF151414">
+
+                </TextBlock>
+            </StatusBarItem>
+        </Grid>
     </Grid>
 </Window>
